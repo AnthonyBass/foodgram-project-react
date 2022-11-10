@@ -4,9 +4,9 @@
 ## Установка проекта локально
 * Загрузите ингредиенты:
 ```bash
-docker-compose exec backend python manage.py load_ingredients
+docker-compose exec web python manage.py load_ingredients
 ```
 * Загрузите теги:
 ```bash
-docker-compose exec backend python manage.py load_tags
+docker-compose exec web python manage.py load_tags
 ```
