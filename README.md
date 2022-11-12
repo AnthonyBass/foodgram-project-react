@@ -1,5 +1,5 @@
 # Foodgram (Anton Basalaev diplom)
-#### _The Last Markdown Editor, Ever_
+
 
 [![Django-app workflow](https://github.com/AnthonyBass/foodgram-project-react/actions/workflows/foodgram_workflow.yml/badge.svg)](https://github.com/AnthonyBass/foodgram-project-react/actions/workflows/foodgram_workflow.yml)
 ## Адрес проекта:
