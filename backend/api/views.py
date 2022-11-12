@@ -3,37 +3,26 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from djoser.views import UserViewSet
-from recipes.models import (
-    AmountIngredientRecipe,
-    Cart,
-    Favorites,
-    Ingredient,
-    Recipe,
-    Tag,
-)
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import (IsAuthenticated,
-                                        IsAuthenticatedOrReadOnly
-                                        )
+                                        IsAuthenticatedOrReadOnly)
 from rest_framework.response import Response
+
+from recipes.models import (AmountIngredientRecipe, Cart, Favorites,
+                            Ingredient, Recipe, Tag)
 from users.models import Follow
 
 from .filters import IngredientSearchFilter, RecipeFilter
 from .paginator import CustomPaginationPageSize
 from .permissions import IsAuthorOrReadOnly
-from .serializers import (
-    CartSerializer,
-    FavoritesSerializer,
-    FollowCreateSerializer,
-    IngredientSerializer,
-    RecipeCreateSerializer,
-    RecipeSerializer,
-    TagSerializer,
-)
+from .serializers import (CartSerializer, FavoritesSerializer,
+                          FollowCreateSerializer, IngredientSerializer,
+                          RecipeCreateSerializer, RecipeSerializer,
+                          TagSerializer)
 
 User = get_user_model()
 
@@ -97,7 +86,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
             "UTF-8"
         ))
         response = HttpResponse(content_type="application/pdf")
-        response["Content-Disposition"] = ("attachment; " 
+        response["Content-Disposition"] = ("attachment; "
                                            'filename="shopping_list.pdf"'
                                            )
         page = canvas.Canvas(response)

@@ -31,10 +31,16 @@ class Tag(models.Model):
 
 
 class Recipe(models.Model):
-    publication_date = models.DateTimeField("Дата публикации", auto_now_add=True)
+    publication_date = models.DateTimeField(
+        "Дата публикации",
+        auto_now_add=True
+    )
 
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="recipes", verbose_name="Автор"
+        User,
+        on_delete=models.CASCADE,
+        related_name="recipes",
+        verbose_name="Автор"
     )
     name = models.CharField("Название", max_length=200)
     image = models.ImageField(
@@ -48,11 +54,20 @@ class Recipe(models.Model):
         through="AmountIngredientRecipe",
         verbose_name="Ингредиенты",
     )
-    tags = models.ManyToManyField(Tag, related_name="recipes", verbose_name="Теги")
+    tags = models.ManyToManyField(
+        Tag,
+        related_name="recipes",
+        verbose_name="Теги"
+    )
 
     cooking_time = models.PositiveIntegerField(
         "Время приготовления (в минутах)",
-        validators=(MinValueValidator(1, message="Введите значение от 1 минуты"),),
+        validators=(
+            MinValueValidator(
+                1,
+                message="Введите значение от 1 минуты"
+            ),
+        ),
     )
 
     class Meta:
@@ -66,7 +81,10 @@ class Recipe(models.Model):
 
 class AmountIngredientRecipe(models.Model):
     recipe = models.ForeignKey(
-        Recipe, on_delete=models.CASCADE, related_name="amount", verbose_name="Рецепт"
+        Recipe,
+        on_delete=models.CASCADE,
+        related_name="amount",
+        verbose_name="Рецепт"
     )
     ingredient = models.ForeignKey(
         Ingredient,
@@ -93,7 +111,10 @@ class AmountIngredientRecipe(models.Model):
         )
 
     def __str__(self):
-        return f"""В рецепте: {self.recipe}, ингередиент {(str(self.ingredient)).split('-')[0]} в количестве {self.amount} {(str(self.ingredient)).split('-')[1]}"""
+        return (f"""В рецепте: {self.recipe}, ингередиент
+         {(str(self.ingredient)).split('-')[0]}
+         в количестве {self.amount} {(str(self.ingredient)).split('-')[1]}"""
+                )
 
 
 class Favorites(models.Model):

@@ -2,15 +2,10 @@ import webcolors
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from drf_extra_fields.fields import Base64ImageField
-from recipes.models import (
-    AmountIngredientRecipe,
-    Cart,
-    Favorites,
-    Ingredient,
-    Recipe,
-    Tag,
-)
 from rest_framework import serializers
+
+from recipes.models import (AmountIngredientRecipe, Cart, Favorites,
+                            Ingredient, Recipe, Tag)
 from users.models import Follow
 
 User = get_user_model()
@@ -56,7 +51,9 @@ class IngredientAmountSerializer(serializers.ModelSerializer):
 
     id = serializers.ReadOnlyField(source="ingredient.id")
     name = serializers.ReadOnlyField(source="ingredient.name")
-    measurement_unit = serializers.ReadOnlyField(source="ingredient.measurement_unit")
+    measurement_unit = serializers.ReadOnlyField(
+        source="ingredient.measurement_unit"
+    )
 
     class Meta:
         model = AmountIngredientRecipe
@@ -78,7 +75,14 @@ class CreateUserSerializer(UserCreateSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "email", "username", "first_name", "last_name", "password")
+        fields = (
+            "id",
+            "email",
+            "username",
+            "first_name",
+            "last_name",
+            "password"
+        )
         extra_kwargs = {"password": {"write_only": True}}
 
     def create(self, validated_data):
@@ -162,7 +166,10 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
 
     image = Base64ImageField(required=True, use_url=False)
 
-    tags = serializers.PrimaryKeyRelatedField(queryset=Tag.objects.all(), many=True)
+    tags = serializers.PrimaryKeyRelatedField(
+        queryset=Tag.objects.all(),
+        many=True
+    )
     ingredients = AddingIngredientAmountSerializer(many=True)
 
     class Meta:
