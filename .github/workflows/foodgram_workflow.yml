@@ -53,7 +53,7 @@ jobs:
         with:
           no-cache: true
           push: true
-          context: ../frontend/
+          context: ./frontend/
           tags: anthonybas/foodgram_frontend:latest
   deploy:
     runs-on: ubuntu-latest
