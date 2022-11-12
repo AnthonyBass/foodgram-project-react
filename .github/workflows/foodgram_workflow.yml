@@ -41,13 +41,20 @@ jobs:
         with:
           username: anthonybas
           password: Lovespring12
-      - name: Push to Docker Hub
+      - name: Push to Docker Hub_web
         uses: docker/build-push-action@v2 
         with:
           no-cache: true
           push: true
           context: ./backend/
-          tags: anthonybas/foodgram:latest
+          tags: anthonybas/foodgram_web:latest
+      - name: Push to Docker Hub_front
+        uses: docker/build-push-action@v2
+        with:
+          no-cache: true
+          push: true
+          context: ../frontend/
+          tags: anthonybas/foodgram_frontend:latest
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
