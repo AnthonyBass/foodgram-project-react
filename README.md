@@ -2,7 +2,7 @@
 
 
 ## Установка проекта локально
-* Загрузите ингредиенты:
+* Загрузите список ингредиентов:
 ```bash
 docker-compose exec web python manage.py load_ingredients
 ```
