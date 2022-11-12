@@ -6,10 +6,10 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
     дает доступ авторизованным и администраторам"""
 
     def has_permission(self, request, view):
-        return (
-                request.method in permissions.SAFE_METHODS
-                or request.user.is_authenticated
-        )
+
+        self.t1 = request.method in permissions.SAFE_METHODS
+        self.t2 = request.user.is_authenticated
+        return self.t1 or self.t2
 
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
